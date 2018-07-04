@@ -10,6 +10,7 @@ import userAdd from '@/views/users/add'
 import userDetail from '@/views/users/detail'
 import userEdit from '@/views/users/edit'
 import trafficStat from '@/views/traffic/stat'
+import configs from '@/views/configs/index'
 
 const NotFound = {
   template: '<p>Page Not Found</p>'
@@ -100,6 +101,12 @@ export default {
       name: 'traffic-stat',
       component: trafficStat,
       meta: { title: '流量详情' + title }
+    },
+    {
+      path: '/configs',
+      name: 'configs',
+      component: configs,
+      meta: { title: '配置' + title }
     },
     {
       path: '*',

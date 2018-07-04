@@ -39,6 +39,14 @@
         <i class="fa fa-sitemap weui-tabbar__icon"></i>
         <p class="weui-tabbar__label">节点</p>
       </router-link>
+      <router-link
+        class="weui-tabbar__item"
+        :class="tabberClass[4]"
+        :to="{name: 'configs'}"
+        v-if="profile.isAdmin">
+        <i class="fa fa-cogs weui-tabbar__icon"></i>
+        <p class="weui-tabbar__label">配置</p>
+      </router-link>
     </div>
   </div>
 </template>
@@ -69,7 +77,7 @@ export default {
 
     updateTabber () {
       let now = this.$route.name
-      let tabbers = ['services', 'profile', 'users', 'nodes']
+      let tabbers = ['services', 'profile', 'users', 'nodes', 'configs']
 
       if (tabbers.indexOf(now) === -1) {
         this.tabberShow = false
