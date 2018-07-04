@@ -15,12 +15,31 @@
             <input class="weui-input" type="text" placeholder="请输入节点名称" v-model="name">
           </div>
         </div>
-        <div class="weui-cell">
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
           <div class="weui-cell__hd">
-            <label class="weui-label">节点图标</label>
+            <label class="weui-label">所在地区</label>
           </div>
           <div class="weui-cell__bd">
-            <textarea class="weui-textarea" placeholder="请输入图标地址" rows="3" v-model="avatar"></textarea>
+            <select class="weui-select" v-model="location">
+              <option value="au">澳大利亚</option>
+              <option value="mo">澳门</option>
+              <option value="de">德国</option>
+              <option value="fr">法国</option>
+              <option value="kr">韩国</option>
+              <option value="nl">荷兰</option>
+              <option value="ca">加拿大</option>
+              <option value="us">美国</option>
+              <option value="jp">日本</option>
+              <option value="se">瑞典</option>
+              <option value="tw">台湾</option>
+              <option value="es">西班牙</option>
+              <option value="gr">希腊</option>
+              <option value="hk">香港</option>
+              <option value="sg">新加坡</option>
+              <option value="in">印度</option>
+              <option value="gb">英国</option>
+              <option value="cn">中国</option>
+            </select>
           </div>
         </div>
         <div class="weui-cell">
@@ -116,7 +135,7 @@ export default {
   data () {
     return {
       name: null,
-      avatar: null,
+      location: null,
       description: null,
       server: null,
       method: null,
@@ -136,7 +155,7 @@ export default {
       return this.sort && (isNaN(this.sort) || this.sort <= 0)
     },
     isValid () {
-      return this.name && this.avatar && this.description &&
+      return this.name && this.location && this.description &&
              this.server && this.method && this.isVisible !== null &&
              this.sort && !this.isSortError
     }
@@ -154,7 +173,7 @@ export default {
       Api(`/api/nodes/${this.nodeId}`).then(({ data }) => {
         this.isLoading = false
         this.name = data.name
-        this.avatar = data.avatar
+        this.location = data.location
         this.description = data.description
         this.server = data.server
         this.method = data.method
@@ -182,7 +201,7 @@ export default {
         method,
         body: {
           name: this.name,
-          avatar: this.avatar,
+          location: this.location,
           description: this.description,
           server: this.server,
           method: this.method,

@@ -1,4 +1,5 @@
 import 'weui/dist/style/weui.css'
+import 'flag-icon-css/css/flag-icon.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 
 import Vue from 'vue'

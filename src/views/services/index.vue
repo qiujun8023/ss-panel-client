@@ -15,7 +15,7 @@
         <router-link :to="{name: 'service-detail', params: {serviceId: item.serviceId}}"
           class="weui-media-box weui-media-box_appmsg" v-for="item in items" :key="item.serviceId">
           <div class="weui-media-box__hd">
-            <img class="weui-media-box__thumb" :src="item.avatar">
+            <span class="flag-icon" :class="['flag-icon-' + item.location]"></span>
           </div>
           <div class="weui-media-box__bd">
             <h4 class="weui-media-box__title">{{item.name}}</h4>
@@ -77,8 +77,9 @@ export default {
   .weui-media-box__info {
     margin-top: 10px;
   }
-  .weui-media-box_appmsg .weui-media-box__thumb {
-    vertical-align: middle;
+  .flag-icon {
+    width: 55px;
+    line-height: 60px;
   }
 }
 </style>
