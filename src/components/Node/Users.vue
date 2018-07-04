@@ -12,7 +12,7 @@
           <span class="weui-loadmore__tips">正在加载</span>
         </div>
         <div class="weui-loadmore weui-loadmore_line" v-else-if="!users || !users.length">
-          <span class="weui-loadmore__tips">暂无用户信息</span>
+          <span class="weui-loadmore__tips">暂无用户</span>
         </div>
         <div class="weui-cells" v-else>
           <div class="weui-cell" v-for="user in filtered" :key="user.userId">
@@ -55,6 +55,9 @@ export default {
   .fa.fa-expand,
   .fa.fa-compress {
     float: right;
+    font-size: 16px;
+    line-height: 20px;
+    cursor: pointer;
   }
 }
 </style>

@@ -86,10 +86,17 @@
         </div>
       </div>
 
+      <node-tokens
+        :loading="isLoading.tokens"
+        :tokens="tokens"
+        @create="createToken()">
+      </node-tokens>
+
       <node-users
         :loading="isLoading.users"
         :users="users">
       </node-users>
+
       <traffic-stat
         :loading="isLoading.stat"
         :stat="stat"
@@ -102,6 +109,7 @@
 <script>
 import Api from '@/api'
 import NodeUsers from '@/components/Node/Users'
+import NodeTokens from '@/components/Node/Tokens'
 import TrafficStat from '@/components/Traffic/Stat'
 import TrafficChartStat from '@/components/Traffic/Chart/Stat'
 import { fromNow } from '@/libs/utils'
@@ -110,6 +118,7 @@ export default {
   props: ['profile'],
   components: {
     NodeUsers,
+    NodeTokens,
     TrafficStat,
     TrafficChartStat
   },
@@ -117,10 +126,12 @@ export default {
   data () {
     return {
       node: {},
+      tokens: {},
       users: [],
       stat: [],
       isLoading: {
         node: false,
+        tokens: false,
         stat: false,
         users: false
       }
@@ -135,6 +146,7 @@ export default {
 
   created () {
     this.fetchNode()
+    this.fetchTokens()
     this.fetchUsers()
     this.fetchStat()
   },
@@ -147,6 +159,33 @@ export default {
         this.node = data
       }).catch(() => {
         this.isLoading.node = false
+      })
+    },
+
+    fetchTokens () {
+      this.isLoading.tokens = true
+      Api(`/api/nodes/${this.nodeId}/tokens`).then(({ data }) => {
+        this.isLoading.tokens = false
+        this.tokens = data
+      }).catch(() => {
+        this.isLoading.tokens = false
+      })
+    },
+
+    createToken () {
+      let title = prompt('请输入Token用途描述', '')
+      if (!title) {
+        return
+      }
+
+      this.isLoading.tokens = true
+      Api(`/api/nodes/${this.nodeId}/tokens`, {
+        method: 'POST',
+        body: { title }
+      }).then(({ data }) => {
+        this.fetchTokens()
+      }).catch(() => {
+        this.isLoading.tokens = false
       })
     },
 

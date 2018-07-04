@@ -5,6 +5,7 @@ import profileEdit from '@/views/profile/edit'
 import nodes from '@/views/nodes'
 import nodeDetail from '@/views/nodes/detail'
 import nodeEdit from '@/views/nodes/edit'
+import nodeTokenDetail from '@/views/nodes/tokens/detail'
 import users from '@/views/users'
 import userAdd from '@/views/users/add'
 import userDetail from '@/views/users/detail'
@@ -71,6 +72,12 @@ export default {
       name: 'node-edit',
       component: nodeEdit,
       meta: { title: '编辑节点' + title }
+    },
+    {
+      path: '/nodes/:nodeId/tokens/:tokenId/detail',
+      name: 'node-token-detail',
+      component: nodeTokenDetail,
+      meta: { title: 'Token详情' + title }
     },
     {
       path: '/users',

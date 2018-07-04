@@ -67,6 +67,9 @@ export default {
   .fa-expand,
   .fa-compress {
     float: right;
+    font-size: 16px;
+    line-height: 20px;
+    cursor: pointer;
   }
 }
 </style>
