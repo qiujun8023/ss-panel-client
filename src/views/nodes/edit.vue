@@ -22,7 +22,6 @@
           <div class="weui-cell__bd">
             <select class="weui-select" v-model="location">
               <option value="au">澳大利亚</option>
-              <option value="mo">澳门</option>
               <option value="de">德国</option>
               <option value="fr">法国</option>
               <option value="kr">韩国</option>
@@ -31,10 +30,8 @@
               <option value="us">美国</option>
               <option value="jp">日本</option>
               <option value="se">瑞典</option>
-              <option value="tw">台湾</option>
               <option value="es">西班牙</option>
               <option value="gr">希腊</option>
-              <option value="hk">香港</option>
               <option value="sg">新加坡</option>
               <option value="in">印度</option>
               <option value="gb">英国</option>

@@ -183,7 +183,13 @@ export default {
         method: 'POST',
         body: { title }
       }).then(({ data }) => {
-        this.fetchTokens()
+        this.$router.push({
+          name: 'node-token-detail',
+          params: {
+            nodeId: this.nodeId,
+            tokenId: data.nodeTokenId
+          }
+        })
       }).catch(() => {
         this.isLoading.tokens = false
       })
