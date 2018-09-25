@@ -25,13 +25,15 @@ export default {
             splitNumber: 5,
             axisLine: {
               lineStyle: {
-                color: [[0.3, '#00d5ae'], [0.7, '#56b0f1'], [1, '#fc6c84']],
+                color: [[0.3, '#fc6c84'], [0.7, '#56b0f1'], [1, '#00d5ae']],
                 width: 25
               }
             },
             detail: {
-              formatter: (value) => value + '%',
-              padding: [80, 0, 0, 0]
+              formatter: (value) => value + '% 剩余',
+              padding: [80, 0, 0, 0],
+              fontSize: 18,
+              lineHeight: 36
             }
           }
         }
@@ -44,9 +46,9 @@ export default {
       if (_.isEmpty(this.user)) {
         return 0
       }
-      let trafficLimit = this.user.trafficLimit || 0
-      let trafficUsed = (this.user.flowUp + this.user.flowDown) || 0
-      return _.floor(trafficUsed / trafficLimit * 100)
+      let limit = this.user.trafficLimit || 0
+      let used = (this.user.flowUp + this.user.flowDown) || 0
+      return _.floor((limit - used) / limit * 100)
     },
 
     chartData () {

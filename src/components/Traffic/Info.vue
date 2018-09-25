@@ -15,20 +15,11 @@
           </div>
           <div class="weui-cell">
             <div class="weui-cell__bd">
-              <p>上传流量已使用</p>
+              <p>流量已使用</p>
             </div>
             <div class="weui-cell__ft">
               <i class="weui-loading" v-if="loading"></i>
-              <span v-else>{{filesize(user.flowUp || 0)}}</span>
-            </div>
-          </div>
-          <div class="weui-cell">
-            <div class="weui-cell__bd">
-              <p>下载流量已使用</p>
-            </div>
-            <div class="weui-cell__ft">
-              <i class="weui-loading" v-if="loading"></i>
-              <span v-else>{{filesize(user.flowDown || 0)}}</span>
+              <span v-else>{{filesize(user.flowUp || 0 + user.flowDown || 0)}}</span>
             </div>
           </div>
           <router-link
