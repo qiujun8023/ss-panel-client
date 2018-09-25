@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "echarts": "^4.2.0-rc.1",
-    "echarts-liquidfill": "^1.0.4",
     "filesize": "^3.6.1",
     "flag-icon-css": "^3.2.0",
     "font-awesome": "^4.7.0",
