@@ -1,3 +1,5 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 import services from '@/views/services/index'
 import serviceDetail from '@/views/services/detail'
 import profile from '@/views/profile'
@@ -19,7 +21,7 @@ const NotFound = {
 
 let title = ' - 科学上网'
 
-export default {
+const router = new VueRouter({
   routes: [
     {
       path: '/',
@@ -121,4 +123,13 @@ export default {
       meta: { title: '页面未找到' }
     }
   ]
-}
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || ''
+  next()
+})
+
+Vue.use(VueRouter)
+
+export default router

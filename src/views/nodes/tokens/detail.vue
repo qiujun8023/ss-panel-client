@@ -121,7 +121,7 @@ export default {
         method: 'DELETE'
       }).then(({ data }) => {
         this.isLoading = false
-        this.$router.push({name: 'node-detail'})
+        this.$router.push({ name: 'node-detail' })
       })
     },
 

@@ -14,7 +14,7 @@
 
 .comp-background {
   width: 100%;
-  height: 230px;
+  height: 200px;
   animation-name: colorful;
   animation-duration: 24s;
   animation-timing-function: linear;

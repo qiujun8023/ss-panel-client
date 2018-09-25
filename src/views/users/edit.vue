@@ -195,7 +195,7 @@ export default {
         }
       }).then(() => {
         this.isSubmit = false
-        this.$router.push({name: 'user-detail'})
+        this.$router.push({ name: 'user-detail' })
       }).catch(() => {
         this.isSubmit = false
       })
@@ -213,7 +213,7 @@ export default {
         method: 'DELETE'
       }).then(() => {
         this.isRemove = false
-        this.$router.push({name: 'users'})
+        this.$router.push({ name: 'users' })
       }).catch(() => {
         this.isRemove = false
       })

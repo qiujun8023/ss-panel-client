@@ -230,7 +230,7 @@ export default {
         method: 'DELETE'
       }).then(() => {
         this.isRemove = false
-        this.$router.push({name: 'nodes'})
+        this.$router.push({ name: 'nodes' })
       }).catch(() => {
         this.isRemove = false
       })

@@ -3,28 +3,19 @@ import 'flag-icon-css/css/flag-icon.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import VeGauge from 'v-charts/lib/gauge.common'
+import VeHistogram from 'v-charts/lib/histogram.common'
 import VueClipboards from 'vue-clipboards'
-
-import Router from '@/router'
 import App from '@/App'
+import router from '@/router'
 
-Vue.use(VueRouter)
+Vue.component(VeGauge.name, VeGauge)
+Vue.component(VeHistogram.name, VeHistogram)
 Vue.use(VueClipboards)
 
-const router = new VueRouter({
-  routes: Router.routes
-})
+Vue.config.productionTip = false
 
-router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || ''
-  next()
-})
-
-/* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
-  template: '<App/>',
-  components: { App }
-})
+  render: h => h(App)
+}).$mount('#app')

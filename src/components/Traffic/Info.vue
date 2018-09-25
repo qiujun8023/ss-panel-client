@@ -6,7 +6,16 @@
         <div class="weui-cells">
           <div class="weui-cell">
             <div class="weui-cell__bd">
-              <p>上传流量</p>
+              <p>流量限额</p>
+            </div>
+            <div class="weui-cell__ft">
+              <i class="weui-loading" v-if="loading"></i>
+              <span v-else>{{filesize(user.trafficLimit || 0)}}</span>
+            </div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>上传流量已使用</p>
             </div>
             <div class="weui-cell__ft">
               <i class="weui-loading" v-if="loading"></i>
@@ -15,7 +24,7 @@
           </div>
           <div class="weui-cell">
             <div class="weui-cell__bd">
-              <p>下载流量</p>
+              <p>下载流量已使用</p>
             </div>
             <div class="weui-cell__ft">
               <i class="weui-loading" v-if="loading"></i>

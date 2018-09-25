@@ -1,47 +1,37 @@
 <template>
   <div class="comp-traffic-chart-sum">
-    <background></background>
     <div class="traffic">
-      <e-charts :options="options"></e-charts>
-      <div class="value">
-        {{filesize(trafficUsed || 0) + ' / ' + filesize(trafficLimit || 0)}}
-      </div>
+      <ve-gauge
+        height="100%"
+        :data="chartData"
+        :settings="chartSetting">
+      </ve-gauge>
     </div>
   </div>
 </template>
 
 <script>
 import _ from 'lodash'
-import filesize from 'filesize'
-import ECharts from 'vue-echarts/components/ECharts.vue'
-import 'echarts-liquidfill'
-
-import Background from '@/components/Background'
 
 export default {
   props: ['user'],
-  components: {
-    ECharts,
-    Background
-  },
 
   data () {
     return {
-      options: {
-        series: {
-          type: 'liquidFill',
-          color: ['#36A2EB'],
-          data: [0],
-          outline: {
-            show: false
-          },
-          label: {
-            normal: {
-              textStyle: {
-                fontSize: 22,
-                fontWeight: 400,
-                color: '#36A2EB'
+      chartSetting: {
+        seriesMap: {
+          used: {
+            radius: '85%',
+            splitNumber: 5,
+            axisLine: {
+              lineStyle: {
+                color: [[0.3, '#00d5ae'], [0.7, '#56b0f1'], [1, '#fc6c84']],
+                width: 25
               }
+            },
+            detail: {
+              formatter: (value) => value + '%',
+              padding: [80, 0, 0, 0]
             }
           }
         }
@@ -50,46 +40,22 @@ export default {
   },
 
   computed: {
-    trafficLimit () {
-      if (!this.user) {
-        return 0
-      }
-      return this.user.trafficLimit || 0
-    },
-
-    trafficUsed () {
-      if (!this.user) {
-        return 0
-      }
-      return (this.user.flowUp + this.user.flowDown) || 0
-    },
-
     trafficPercent () {
-      let unused = this.trafficLimit - this.trafficUsed
-      if (unused < 0 || this.trafficLimit <= 0) {
+      if (_.isEmpty(this.user)) {
         return 0
       }
-      return _.round(unused / this.trafficLimit, 4)
-    }
-  },
+      let trafficLimit = this.user.trafficLimit || 0
+      let trafficUsed = (this.user.flowUp + this.user.flowDown) || 0
+      return _.floor(trafficUsed / trafficLimit * 100)
+    },
 
-  created () {
-    if (this.user.trafficLimit) {
-      this.updateChart()
-    }
-  },
-
-  methods: {
-    filesize,
-
-    updateChart () {
-      this.options.series.data = [this.trafficPercent]
-    }
-  },
-
-  watch: {
-    user () {
-      this.updateChart()
+    chartData () {
+      return {
+        columns: ['type', 'value'],
+        rows: [
+          { type: 'used', value: this.trafficPercent }
+        ]
+      }
     }
   }
 }
@@ -100,21 +66,10 @@ export default {
 .comp-traffic-chart-sum {
   .traffic {
     width: 100%;
-    height: 230px;
-    margin-top: -230px;
+    height: 200px;
+    background-color: rgba(209, 140, 71, 0.31);
     text-align: center;
     position: relative;
-  }
-  .traffic > .echarts {
-    width: 200px;
-    height: 200px;
-    margin: auto;
-  }
-  .traffic > .value {
-    margin-top: -18px;
-    font-size: 18px;
-    font-weight: 300;
-    color: #fff;
   }
 }
 </style>

@@ -103,7 +103,7 @@ export default {
       let password = this.password
       Api('/api/profile', {
         method: 'PUT',
-        body: {port, password}
+        body: { port, password }
       }).then(() => {
         this.isSubmit = false
         this.$emit('profileUpdate')

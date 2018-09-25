@@ -74,7 +74,7 @@ export default {
       this.isLoading = true
       Api('/api/traffic/stat', {
         query: this.query
-      }).then(({data}) => {
+      }).then(({ data }) => {
         this.isLoading = false
         this.stat = data
       }).catch(() => {

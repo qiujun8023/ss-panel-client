@@ -71,7 +71,7 @@ export default {
         }
       }).then(({ data: { userId } }) => {
         this.isLoading = false
-        this.$router.push({name: 'user-detail', params: { userId }})
+        this.$router.push({ name: 'user-detail', params: { userId } })
       }).catch(() => {
         this.isLoading = false
       })

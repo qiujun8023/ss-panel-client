@@ -1,116 +1,120 @@
 <template>
   <div class="comp-traffic-chart-stat">
-    <background></background>
     <div class="traffic">
-      <e-charts :options="options" v-if="options"></e-charts>
+      <ve-histogram
+        height="100%"
+        :grid="grid"
+        :tooltip="tooltip"
+        :xAxis="xAxis"
+        :yAxis="yAxis"
+        :series="series"></ve-histogram>
     </div>
   </div>
 </template>
 
 <script>
 import _ from 'lodash'
-import ECharts from 'vue-echarts/components/ECharts.vue'
-import 'echarts/lib/chart/bar'
-import 'echarts/lib/component/dataZoom'
-
-import Background from '@/components/Background'
 
 const TRAFFIC_MULTIPLE = 1073741824
 
 export default {
   props: ['data', 'loading'],
-  components: {
-    ECharts,
-    Background
-  },
 
-  data () {
-    return {
-      options: null
-    }
-  },
-
-  created () {
-    this.updateChart()
-  },
-
-  methods: {
-    updateChart () {
+  computed: {
+    date () {
       if (this.loading) {
-        return false
+        return []
       }
+      return this.data.map(item => item.date)
+    },
 
-      let date = []
-      let data = []
-      for (let item of this.data) {
-        date.push(item.date)
-        data.push(_.round((item.flowUp + item.flowDown) / TRAFFIC_MULTIPLE, 2))
+    flow () {
+      if (this.loading) {
+        return []
       }
+      return this.data.map(item => _.round((item.flowUp + item.flowDown) / TRAFFIC_MULTIPLE, 2))
+    },
 
-      let dataShadow = _.fill(Array(this.data.length), _.ceil(_.max(data)))
+    shadow () {
+      if (this.loading) {
+        return []
+      }
+      return _.fill(Array(this.data.length), _.ceil(_.max(this.flow)) || 1)
+    },
 
-      this.options = {
-        xAxis: [{
-          type: 'category',
-          data: date,
-          axisLabel: {
-            textStyle: {
-              color: '#fff'
-            }
-          },
-          axisLine: {
-            lineStyle: {
-              color: '#eee'
-            }
-          }
-        }],
-        yAxis: {
-          axisLabel: {
-            textStyle: {
-              color: '#fff'
-            }
-          },
-          axisLine: {
-            lineStyle: {
-              color: '#eee'
-            }
-          },
-          splitLine: {
-            show: false
+    grid () {
+      return {
+        top: '20%',
+        left: '8%',
+        right: '8%',
+        bottom: '8%'
+      }
+    },
+
+    tooltip () {
+      return {
+        show: false
+      }
+    },
+
+    xAxis () {
+      return [{
+        type: 'category',
+        data: this.date,
+        axisLabel: {
+          textStyle: {
+            color: '#fff'
           }
         },
-        dataZoom: [{
-          type: 'inside'
-        }],
-        series: [{
-          // For shadow
-          type: 'bar',
-          itemStyle: {
-            normal: {color: 'rgba(0,0,0,0.05)'}
-          },
-          barGap: '-100%',
-          barCategoryGap: '40%',
-          data: dataShadow,
-          animation: false
-        }, {
-          type: 'bar',
-          itemStyle: {
-            normal: {
-              color: 'rgba(54, 162, 235, 0.8)'
-            },
-            emphasis: {
-              color: 'rgba(54, 162, 235, 1)'
-            }
-          },
-          data: data
-        }]
-      }
-    }
-  },
+        axisLine: {
+          lineStyle: {
+            color: '#eee'
+          }
+        }
+      }]
+    },
 
-  watch: {
-    data () {
-      this.updateChart()
+    yAxis () {
+      return {
+        axisLabel: {
+          textStyle: {
+            color: '#fff'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#eee'
+          }
+        },
+        splitLine: {
+          show: false
+        }
+      }
+    },
+
+    series () {
+      return [{
+        // For shadow
+        type: 'bar',
+        itemStyle: {
+          normal: { color: 'rgba(0,0,0,0.05)' }
+        },
+        barGap: '-100%',
+        barCategoryGap: '40%',
+        data: this.shadow,
+        animation: false
+      }, {
+        type: 'bar',
+        itemStyle: {
+          normal: {
+            color: 'rgba(54, 162, 235, 0.8)'
+          },
+          emphasis: {
+            color: 'rgba(54, 162, 235, 1)'
+          }
+        },
+        data: this.flow
+      }]
     }
   }
 }
@@ -121,21 +125,10 @@ export default {
 .comp-traffic-chart-stat {
   .traffic {
     width: 100%;
-    height: 230px;
-    margin-top: -230px;
+    height: 200px;
+    background-color: rgba(209, 140, 71, 0.31);
     text-align: center;
     position: relative;
-  }
-  .traffic > .echarts {
-    width: 100%;
-    height: 100%;
-    margin: auto;
-  }
-  .traffic > .value {
-    margin-top: -18px;
-    font-size: 18px;
-    font-weight: 300;
-    color: #fff;
   }
 }
 </style>
