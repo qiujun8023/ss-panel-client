@@ -66,6 +66,15 @@
             </div>
             <div class="weui-cell">
               <div class="weui-cell__bd">
+                <p>活跃时间</p>
+              </div>
+              <div class="weui-cell__ft">
+                <i class="weui-loading" v-if="isLoading.node"></i>
+                <span v-else>{{fromNow(node.activedAt)}}</span>
+              </div>
+            </div>
+            <div class="weui-cell">
+              <div class="weui-cell__bd">
                 <p>更新时间</p>
               </div>
               <div class="weui-cell__ft">

@@ -27,10 +27,7 @@
         <div class="weui-media-box__bd">
           <h4 class="weui-media-box__title">
             <span>{{item.name}}</span>
-            <span class="visible" v-if="item.isVisible">
-              <i class="fa fa-eye"></i>
-            </span>
-            <span class="hidden" v-else>
+            <span class="hidden" v-if="!item.isVisible">
               <i class="fa fa-eye-slash"></i>
             </span>
           </h4>
@@ -89,10 +86,6 @@ export default {
   }
 
   .weui-media-box__title  {
-    .visible {
-      float: right;
-      color: #36A2EB;
-    }
     .hidden {
       float: right;
       color: #FB7886;
