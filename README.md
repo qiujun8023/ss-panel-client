@@ -4,15 +4,8 @@
 
 ### 状态
 
-##### Master
-
 [![Build Status](https://travis-ci.org/qiujun8023/ss-panel-server.svg?branch=master)](https://travis-ci.org/qiujun8023/ss-panel-server)
 [![Coverage Status](https://coveralls.io/repos/github/qiujun8023/ss-panel-server/badge.svg?branch=master)](https://coveralls.io/github/qiujun8023/ss-panel-server?branch=master)
-
-##### Develop
-
-[![Build Status](https://travis-ci.org/qiujun8023/ss-panel-server.svg?branch=develop)](https://travis-ci.org/qiujun8023/ss-panel-server)
-[![Coverage Status](https://coveralls.io/repos/github/qiujun8023/ss-panel-server/badge.svg?branch=develop)](https://coveralls.io/github/qiujun8023/ss-panel-server?branch=develop)
 
 ### 注意
 
