@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/qious/ss-panel-client.git"
+    "url": "https://github.com/qiujun8023/ss-panel-client.git"
   },
   "scripts": {
     "serve": "vue-cli-service serve",
